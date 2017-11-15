@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Rin Icon.png</normaloff>Rin Icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="FileList">
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1600</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="act_New"/>
+    <addaction name="act_Open"/>
+    <addaction name="act_Close_Tab"/>
+    <addaction name="act_Change_Database_Directory"/>
+    <addaction name="act_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menuTab_Functions">
+    <property name="title">
+     <string>Tab Functions</string>
+    </property>
+    <addaction name="act_Open_Multiple"/>
+    <addaction name="act_Move_Link"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTab_Functions"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="act_New">
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="act_Open">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="act_Close_Tab">
+   <property name="text">
+    <string>Close Tab</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="act_Exit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+Q</string>
+   </property>
+  </action>
+  <action name="act_Refresh">
+   <property name="text">
+    <string>Refresh</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionClear_History">
+   <property name="text">
+    <string>Clear History</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+H</string>
+   </property>
+  </action>
+  <action name="act_Move_Link">
+   <property name="text">
+    <string>Move Item</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="act_Import">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="act_Open_Multiple">
+   <property name="text">
+    <string>Open Multiple</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O, Ctrl+S</string>
+   </property>
+  </action>
+  <action name="act_Change_Database_Directory">
+   <property name="text">
+    <string>Change Database Directory</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
