@@ -1,7 +1,7 @@
 import os
 import random
 import datetime
-from PyQt4 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from webpage_database_api import WebPages
 from file_database_api import Files
@@ -10,8 +10,7 @@ from gui_select import Select
 __author__ = 'KPGM'
 form_frame = uic.loadUiType('frame.ui')[0]
 
-
-class Frame(QtGui.QWidget, form_frame):
+class Frame(QtWidgets.QWidget, form_frame):
     def __init__(self, filename, delay, parent=None):
         self.filename = filename
         self.delay = delay
@@ -19,7 +18,7 @@ class Frame(QtGui.QWidget, form_frame):
         self.current = ''
         self.items = {}  # dictionary between Webpage names and QTableWidgetItems
 
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.setupUi(self)
 
         self.connect_components()
@@ -38,20 +37,20 @@ class Frame(QtGui.QWidget, form_frame):
         self.tbv_LinkView.cellClicked.connect(self.cell_clicked)
         self.tbv_LinkView.cellChanged.connect(self.cell_changed)
         self.tbv_LinkView.itemSelectionChanged.connect(self.selection_changed)
-        self.tbv_LinkView.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
+        self.tbv_LinkView.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
 
         self.lin_In_Delay.textChanged.connect(self.delay_changed)
 
     def initialize_shortcuts(self):
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_R), self, self.display_links)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_C), self, self.btn_copy_link_clicked)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_S), self, self.btn_add_update_clicked)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_C),
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_R), self, self.display_links)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_C), self, self.btn_copy_link_clicked)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_S), self, self.btn_add_update_clicked)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_C),
                         self, self.clear)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_R),
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_R),
                         self, self.btn_remove_clicked)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_F), self, self.find_item)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_A), self, self.increment_chapter)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_F), self, self.find_item)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_A), self, self.increment_chapter)
 
     def initialize_components(self):
         self.lin_FileLocation.setText(self.filename)
@@ -61,13 +60,13 @@ class Frame(QtGui.QWidget, form_frame):
         self.display_links()
 
     def resize_table(self):
-        self.tbv_LinkView.horizontalHeader().setResizeMode(QtGui.QHeaderView.Stretch)
+        self.tbv_LinkView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         size = 0
         for i in range(5):
             size += self.tbv_LinkView.horizontalHeader().sectionSize(i)
 
-        self.tbv_LinkView.horizontalHeader().setResizeMode(QtGui.QHeaderView.Fixed)
+        self.tbv_LinkView.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Fixed)
 
         self.tbv_LinkView.horizontalHeader().resizeSection(0, int(size * .4))
         self.tbv_LinkView.horizontalHeader().resizeSection(1, int(size * .3))
@@ -99,12 +98,12 @@ class Frame(QtGui.QWidget, form_frame):
 
         for row, name in enumerate(names):
             data = self.data.get_data(name)
-            self.items[name] = QtGui.QTableWidgetItem(name)
+            self.items[name] = QtWidgets.QTableWidgetItem(name)
             new_items = [self.items[name],
-                         QtGui.QTableWidgetItem(str(data['Link'])),
-                         QtGui.QTableWidgetItem(str(data['Vol'])),
-                         QtGui.QTableWidgetItem(str(data['Chap'])),
-                         QtGui.QTableWidgetItem(str(data['Date']))]
+                         QtWidgets.QTableWidgetItem(str(data['Link'])),
+                         QtWidgets.QTableWidgetItem(str(data['Vol'])),
+                         QtWidgets.QTableWidgetItem(str(data['Chap'])),
+                         QtWidgets.QTableWidgetItem(str(data['Date']))]
             for col in range(len(new_items)):
                 self.tbv_LinkView.setItem(row, col, new_items[col])
 

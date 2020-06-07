@@ -1,5 +1,4 @@
 # Fixes
-- [ ] Refactor for PyQt5 and Python 3.6
 
 # Features
 - [ ] Add last date modified [5/28/2015]
@@ -10,3 +9,4 @@
 # Finished
 - [x] Handle exception when it can't find a file in lastopen.json [8/1/2015]
 - [x] Fix search feature [5/28/2015]
+- [x] Refactor for PyQt5 and Python 3.8 [2/15/2020]

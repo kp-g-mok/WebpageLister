@@ -1,4 +1,5 @@
-python setup.py build
+To Build:
+pyinstaller -F gui_main.spec
 
 https://docs.python.org/2/library/webbrowser.html
 

@@ -1,19 +1,17 @@
 import os
 import sys
-from PyQt4 import QtCore, QtGui, uic
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from file_database_api import Files
 from gui_frame import Frame
 from gui_select import Select
 
 __author__ = 'KPGM'
-
 form_main = uic.loadUiType('main.ui')[0]
 
-
-class MainWindow(QtGui.QMainWindow, form_main):
+class MainWindow(QtWidgets.QMainWindow, form_main):
     def __init__(self, parent=None):
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.setupUi(self)
 
         self.last_session = Files('last_open.json')
@@ -61,11 +59,11 @@ class MainWindow(QtGui.QMainWindow, form_main):
         self.FileList.currentChanged.connect(self.refresh)
 
     def initialize_shortcuts(self):
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_Tab),
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_Tab),
                         self, self.next_tab)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_Tab),
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.SHIFT + QtCore.Qt.Key_Tab),
                         self, self.previous_tab)
-        QtGui.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_V), self, self.skip)
+        QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.CTRL + QtCore.Qt.Key_V), self, self.skip)
 
     def next_tab(self):
         new_index = (self.FileList.currentIndex() + 1) % self.FileList.count()
@@ -91,7 +89,7 @@ class MainWindow(QtGui.QMainWindow, form_main):
         Creates a new csv list and opens in a new tab
         :return:
         '''
-        filename = QtGui.QFileDialog.getSaveFileName(QtGui.QFileDialog(), 'New file', self.directory, '*.json')
+        filename = QtWidgets.QFileDialog.getSaveFileName(QtWidgets.QFileDialog(), 'New file', self.directory, '*.json')[0]
         if filename != '':
             base_filename = os.path.basename(filename)
 
@@ -107,7 +105,7 @@ class MainWindow(QtGui.QMainWindow, form_main):
         Opens a file in current tab or new tab
         :return:
         """
-        filename = QtGui.QFileDialog.getOpenFileName(QtGui.QFileDialog(), 'Open file', self.directory, '*.json')
+        filename = QtWidgets.QFileDialog.getOpenFileName(QtWidgets.QFileDialog(), 'Open file', self.directory, '*.json')[0]
         if filename != '':
             base_filename = os.path.basename(filename)
 
@@ -130,8 +128,8 @@ class MainWindow(QtGui.QMainWindow, form_main):
         self.FileList.removeTab(current)
 
     def act_change_default_account_directory_triggered(self):
-        self.directory = QtGui.QFileDialog.getExistingDirectory(QtGui.QFileDialog(), None,
-                                                                'Choose Webpage Database Directory')
+        self.directory = QtWidgets.QFileDialog.getExistingDirectory(QtWidgets.QFileDialog(), None,
+                                                                'Choose Webpage Database Directory')[0]
         self.last_session.set_directory(self.directory)
 
     def act_exit_triggered(self):
@@ -185,7 +183,7 @@ def error_message(err_msg):
     msg.exec_()
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     myWindow = MainWindow(None)
     myWindow.show()
     myWindow.refresh()

@@ -1,12 +1,11 @@
-from PyQt4 import QtCore, QtGui, uic
-__author__ = 'Gareth Mok'
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
+__author__ = 'Gareth Mok'
 form_import = uic.loadUiType('select.ui')[0]
 
-
-class Select(QtGui.QDialog, form_import):
+class Select(QtWidgets.QDialog, form_import):
     def __init__(self, choices, editable, parent=None):
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         self.setupUi(self)
 
         self.choice = ''
@@ -20,7 +19,7 @@ class Select(QtGui.QDialog, form_import):
             self.combo_Choices.clearEditText()
         else:
             self.combo_Choices.setEditable(False)
-        self.buttonBox.button(QtGui.QDialogButtonBox.Ok).clicked.connect(self.btn_accepted_clicked)
+        self.buttonBox.button(QtWidgets.QDialogButtonBox.Ok).clicked.connect(self.btn_accepted_clicked)
 
     def btn_accepted_clicked(self):
         self.choice = self.combo_Choices.currentText()
@@ -35,4 +34,4 @@ class Select(QtGui.QDialog, form_import):
         dialog = Select(choices, editable, parent)
         result = dialog.exec_()
 
-        return dialog.choice, result == QtGui.QDialog.Accepted
+        return dialog.choice, result == QtWidgets.QDialog.Accepted
